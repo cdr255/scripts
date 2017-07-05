@@ -6,7 +6,7 @@ currtime=$(date +"%F_%T");
 
 echo \#EXTM3U > $currtime-mpdburn-playlist.m3u;
 
-mpc -f "##EXTINF:%time%,%artist% - %title%\n/home/chrissofer/Music/%file%" playlist | perl -F: -p -e 'if (/^#EXTINF/) {$sec=$F[1]*60; $F[2] =~ s/(^.+),/$1/; $sec += $F[2]; s/^.+,(.+)/#EXTINF:$sec,$1/;}' >> $currtime-mpdburn-playlist.m3u;
+mpc -f "##EXTINF:%time%,%artist% - %title%\n$HOME/Music/%file%" playlist | perl -F: -p -e 'if (/^#EXTINF/) {$sec=$F[1]*60; $F[2] =~ s/(^.+),/$1/; $sec += $F[2]; s/^.+,(.+)/#EXTINF:$sec,$1/;}' >> $currtime-mpdburn-playlist.m3u;
 
 k3b --audiocd $currtime-mpdburn-playlist.m3u --nosplash
 
