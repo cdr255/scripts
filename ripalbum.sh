@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+#
+# Created by Christopher Rodriguez <cdr255@gmail.com>
+# Created on 2017-07-23 19:25:39 -0400
+#
+# Last Modified on 2017-07-23 19:25:57 -0400
+# by Christopher Rodriguez <cdr255@gmail.com
+#
+# --------------------------------------------------------------------
+# ripalbum.sh - TUI album importer
+#
+# This script takes a physical music album on CD and imports it into
+# the user's Beets music library as V0 mp3 files. It depends on the
+# following software: sudo, cdparanoia, python 2.x, beets, and id3tag.
+#
+# --------------------------------------------------------------------
+#
+
+black=$(tput setaf 0)
+red=$(tput setaf 1)
+green=$(tput setaf 10)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+magenta=$(tput setaf 5)
+cyan=$(tput setaf 6)
+white=$(tput setaf 7)
+bold=$(tput bold)
+colorreset=$(tput sgr0)
+
+currtime=$(date +"%F_%T");
+
+usage=$(printf "${bold}${green}Usage: ${colorreset}${white}ripalbum.sh ${red}<Album Name> <Album Artist> <Year \
+Published> <Number of Discs>\n\n ${colorreset}")
+
+if [ "$#" == 4 ]; then
+
+albumname="$1"
+albumyear="$3"
+artistname="$2"
+discstotal="$4"
+disccounter="1"
+
+echo "${bold}${green}Beginning rip of $discstotal CDs for $albumname ($albumyear) by $artistname.${colorreset}"
+
+mkdir $currtime-cdrip/to-import -p
+
+cd $currtime-cdrip
+
+while [ $disccounter -le $discstotal ]; do 
+echo "${bold}${green}Ejecting CD tray using sudo...${colorreset}"
+
+sudo eject;
+
+read -p "${bold}${green}Insert disc $disccounter and press Enter.${colorreset}
+" -s
+
+echo "${bold}${green}Beginning rip of Disc $disccounter of $albumname...${colorreset}"
+
+sleep 10s
+
+cdparanoia -B
+
+for i in *.wav;
+do
+    mv "$i" "disc$disccounter-$i"
+    lame -V0 "disc$disccounter-$i"
+    rm "disc$disccounter-$i"
+done
+
+trackcounter=1
+for i in *.mp3;
+do
+    id3tag -t"$trackcounter" -a"$artistname" -A"$albumname" -y"$albumyear" $i
+    mv "$i" to-import/
+    trackcounter=$trackcounter+1
+done
+
+disccounter=$disccounter+1
+
+done
+
+echo "${bold}${green}All $discstotal CDs have been ripped.${colorreset}"
+echo ""
+echo "${bold}${green}Running the Beets Autotagger...${colorreset}"
+
+beet import to-import/
+
+echo ""
+echo "Cleaning up..."
+cd ..
+rm -rf $currtime-cdrip
+echo ""
+echo "${bold}${green}Operation Complete.${colorreset}"
+
+else
+    echo "$usage"
+fi
