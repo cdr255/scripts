@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+## Version: 1.0.0
+# -*- shell-script-mode -*-
 #
 # Created by Christopher Rodriguez <cdr255@gmail.com>
 # Created on 2017-07-23 19:25:39 -0400

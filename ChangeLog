@@ -1,0 +1,25 @@
+<!-- -*-markdown-*- -->
+# Changelog 
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog][1]
+and this project adheres to [Semantic Versioning][2].
+
+## [Unreleased]
+
+## [1.0.0] - 2018-01-14
+### Added
+- mpdburn.sh - burn currently loaded mpd playlist.
+- ripalbum.sh - rip music album to mp3 V0.
+- ec, ep - call emacsclient easily and automatically.
+- cmake - to make it easier to use on new systems.
+- Changelog, AUTHORS
+
+### Changed
+- Symlinks: NEWS->Changelog, README->README.md, COPYING->LICENSE.
+- Moved scripts to language-based subdirectories.
+### Removed
+- Cruftfiles (~, #)
+
+[1]: http://keepachangelog.com/en/1.0.0/
+[2]: http://semver.org/spec/v2.0.0.html
