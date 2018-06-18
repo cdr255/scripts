@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning][2].
 ### Changed
 - *.ext -> * - cleaner filenames, look more like UNIX commands.
 - Installer now installs irclog.
-- ChangeLog
+- Fixed ChangeLog release links.
 ### Removed
 - Cruft
 
@@ -33,5 +33,7 @@ and this project adheres to [Semantic Versioning][2].
 ### Removed
 - Cruftfiles (~, #)
 
+[1.1.0]: https://github.com/cdr255/scripts/compare/4eb9b8c...3293b12
+[1.0.0]: https://github.com/cdr255/scripts/compare/1dbccbe...4eb9b8c
 [1]: http://keepachangelog.com/en/1.0.0/
 [2]: http://semver.org/spec/v2.0.0.html
