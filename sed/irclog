@@ -1,3 +1,5 @@
+#!/usr/bin/sed -f
+
 # Double Space
 /^$/d;G
 # Headers
