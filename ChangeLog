@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning][2].
 
 ## [Unreleased]
 
+## [1.1.1] - 2018-06-19
+### Changed
+- irclog - No longer considers "Topic" to be a user, alongside "Now".
+
 ## [1.1.0] - 2018-06-18
 ### Added
 - irclog - convert locally stored plaintext IRC log file to markup
@@ -33,6 +37,7 @@ and this project adheres to [Semantic Versioning][2].
 ### Removed
 - Cruftfiles (~, #)
 
+[1.1.1]: https://github.com/cdr255/scripts/compare/3293b12...27cb4d4
 [1.1.0]: https://github.com/cdr255/scripts/compare/4eb9b8c...3293b12
 [1.0.0]: https://github.com/cdr255/scripts/compare/1dbccbe...4eb9b8c
 [1]: http://keepachangelog.com/en/1.0.0/
